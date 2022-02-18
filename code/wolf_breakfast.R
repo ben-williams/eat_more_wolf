@@ -1,13 +1,14 @@
 library(readxl)
 library(dplyr)
+library(here)
 
-grepl(".xlsx", here::here("data", "raw", "Scats sent to OSU 6 July 2021_RESULTS_V2.xlsx"))
-readxl::excel_sheets(here::here("data", "raw", "Scats sent to OSU 6 July 2021_RESULTS_V2.xlsx"))
-read_excel(here::here("data", "raw", "Scats sent to OSU 6 July 2021_RESULTS_V2.xlsx"), "SampleData") %>%
+grepl(".xlsx", here::here("data", "Scats sent to OSU 6 July 2021_RESULTS_V2.xlsx"))
+readxl::excel_sheets(here::here("data", "Scats sent to OSU 6 July 2021_RESULTS_V2.xlsx"))
+read_excel(here::here("data", "Scats sent to OSU 6 July 2021_RESULTS_V2.xlsx"), "SampleData") %>%
   rename_all(function(x) gsub(" ", "_", x)) %>%
   rename_all(tolower) -> sample_data
 
-read_excel(here::here("data", "raw", "Scats sent to OSU 6 July 2021_RESULTS_V2.xlsx"), "Illumina Results") %>%
+read_excel(here::here("data", "Scats sent to OSU 6 July 2021_RESULTS_V2.xlsx"), "Illumina Results") %>%
   dplyr::select(-locus) %>%
   rename_all(function(x) gsub(" ", "_", x)) %>%
   rename_all(tolower) %>%
@@ -24,7 +25,7 @@ read_excel(here::here("data", "raw", "Scats sent to OSU 6 July 2021_RESULTS_V2.x
   left_join(., sample_data) %>% View
 
 
-read_excel(here::here("data", "raw", "POW_scat_locs_map_1_20_2022.xlsx")) %>%
+read_excel(here::here("data", "POW_scat_locs_map_1_20_2022.xlsx")) %>%
   rename_all(function(x) gsub(" ", "_", x)) %>%
   rename_all(tolower) -> locs
 
